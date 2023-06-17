@@ -27,3 +27,14 @@ checks <- unlist(
   lapply(matrices, bindata::check.commonprob)
 )
 checks
+
+corr.matrices <- lapply(matrices, cov2cor)
+
+library(ggcorrplot)
+
+plot_corr <- function(mat){
+  pp <- ggcorrplot(mat, type = "upper", show.diag = FALSE)
+  print(pp)
+}
+
+lapply(corr.matrices, plot_corr)
